@@ -19,7 +19,7 @@ class Player {
         if (newPosition <= boardSize) {
             this.position = newPosition;
         } else {
-            this.position = newPosition - boardSize;
+            this.position = newPosition - properties.length;
             this.coins += 100;
         }
     }
@@ -31,7 +31,7 @@ class Player {
                     this.buy(property);
                     break;
                 case PLAYER_TYPES.DEMANDING:
-                    if (property.rentPrice) {
+                    if (property.rentPrice > 50) {
                         this.buy(property);
                     }
                     break;

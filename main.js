@@ -58,10 +58,14 @@ lineReader.on("line", line => {
         }
     }
 
-    console.log("timeouts:", timeOuts);
-    console.log("média de rodadas:", avgRounds);
-    console.log("vitórias por comportamento:", victoriesByPlayerType);
-    console.log("comportamento que mais venceu:", mostWinningType);
+    console.log("Partidas terminadas por time out:", timeOuts);
+    console.log("Média de rodadas por partida:", avgRounds);
+    console.log("Percentual de vitórias por comportamento:");
+    console.log("\tIMPULSIVE:", victoriesByPlayerType.IMPULSIVE + " %");
+    console.log("\tDEMANDING:", victoriesByPlayerType.DEMANDING + " %");
+    console.log("\t CAUTIOUS:", victoriesByPlayerType.CAUTIOUS + " %");
+    console.log("\t   RANDOM:", victoriesByPlayerType.RANDOM + " %");
+    console.log(`Comportamento que mais venceu: ${mostWinningType.name} -> ${mostWinningType.victoryRate}`);
 });
 
 function hasWinner() {
@@ -131,7 +135,7 @@ function match() {
             let currentProperty = properties[player.position];
             if (currentProperty.ownerId) {
                 if (currentProperty.ownerId != player.id) {
-                    let propertyOwner = players[currentProperty.ownerId];
+                    let propertyOwner = players.find(player => player.id == currentProperty.ownerId);
                     player.payRent(currentProperty, propertyOwner);
                     if (!player.canMove()) {
                         properties.forEach(prop => {
